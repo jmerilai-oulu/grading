@@ -1,0 +1,6 @@
+gitpython
+re
+os
+argparse
+sys
+subprocess

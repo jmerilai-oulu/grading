@@ -25,9 +25,12 @@ def find_prints_in_rust_file(filename):
     for pattern in function_patterns:
         matches = re.findall(pattern, content)
         found_functions.extend(matches)
+
+    # Remove duplicates from the list of found keywords
+    found_keywords = list(set(found_keywords))
     
     if len(found_functions) == len(function_names):
-        print("O - All three functions found in the file.")
+        print("O - All three functions found in the main file.")
     else:
         missing_functions = set(function_names) - set(found_functions)
         print("X - Missing:", missing_functions)
@@ -74,7 +77,7 @@ if __name__ == "__main__":
     parser.add_argument('link', type=str, help='Repository link')
     args = parser.parse_args()
 
-    destination = "./repos/lab1/"
+    destination = "./repo/lab1/"
 
     clone_repository(args.link, destination)
     find_prints_in_rust_file(os.path.join(destination, "src/main.rs"))
